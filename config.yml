@@ -1,0 +1,6 @@
+#图床地址
+endpoint: https://xxxx/api/v1/upload
+#填写你的api
+authorization: Bearer xxxx
+#截图数量
+num_screenshots: 4
