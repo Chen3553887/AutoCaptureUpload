@@ -4,3 +4,5 @@ endpoint: https://xxxx/api/v1/upload
 authorization: Bearer xxxx
 #截图数量
 num_screenshots: 4
+#截图输出地址
+output_dir: E:/AutoCapture
