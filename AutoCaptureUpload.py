@@ -32,7 +32,7 @@ def get_video_duration(video_path):
 def upload_to_image_hosting(image_path):
     # 读取配置文件
     with open("config.yml", "r") as file:
-        config = yaml.safe_load(file)
+        config = yaml.full_load(file)
 
     endpoint = config.get("endpoint")
     authorization = config.get("authorization")
@@ -59,7 +59,7 @@ video_path = input("请拖入视频文件：").strip('"')
 
 # 读取配置文件中的输出路径
 with open("config.yml", "r") as file:
-    config = yaml.safe_load(file)
+    config = yaml.full_load(file)
 output_dir = config.get("output_dir")
 
 # 截取截图并保存到指定路径
