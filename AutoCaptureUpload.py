@@ -17,7 +17,7 @@ def capture_screenshots(video_path, num_screenshots=3, output_dir=None):
 
     # 使用ffmpeg截取视频截图
     for i, timepoint in enumerate(screenshot_times):
-        output_file = f'{screenshots_dir}/{video_name}_{i+1}.jpg'
+        output_file = f'{screenshots_dir}/{video_name}_{i+1}.png'
         ffmpeg_command = ['ffmpeg', '-ss', str(timepoint), '-i', video_path, '-vframes', '1', '-q:v', '2', output_file]
         subprocess.run(ffmpeg_command)
 
@@ -47,15 +47,15 @@ def upload_to_image_hosting(image_path):
 
     # 检查响应状态码
     if response.status_code == 200:
-        print("图片上传成功！")
+        print("Screenshot uploaded successfully!")
         return response.json()
     else:
-        print("图片上传失败。错误信息：", response.text)
+        print("Screenshot upload failed. Error:", response.text)
         return None
 
 
 # 获取拖入的视频文件路径
-video_path = input("请拖入视频文件：").strip('"')
+video_path = input("Please add video files:").strip('"')
 
 # 读取配置文件中的输出路径
 with open("config.yml", "r") as file:
@@ -70,14 +70,14 @@ video_name = os.path.splitext(os.path.basename(video_path))[0]
 screenshots_dir = os.path.join(output_dir, video_name)
 bbcode_collection = []
 for filename in os.listdir(screenshots_dir):
-    if filename.endswith(".jpg"):
+    if filename.endswith(".png"):
         image_path = os.path.join(screenshots_dir, filename)
         result = upload_to_image_hosting(image_path)
         if result and "data" in result:
             bbcode = result["data"]["links"]["bbcode"]
             bbcode_collection.append(bbcode)
 
-print("所有图片返回的bbcode数据合集：\n")
+print("BBCode of all screenshots:\n")
 for bbcode in bbcode_collection:
     print(bbcode+"\n")
-input("按任意键关闭窗口...")
+input("Press any key to close the window...")
