@@ -18,7 +18,8 @@ endpoint: https://xxxx/api/v1/upload
 authorization: Bearer xxxx
 #截图数量
 num_screenshots: 4
-
+#截图保存地址
+output_dir:
 ```
 
 2、运行py文件即可
